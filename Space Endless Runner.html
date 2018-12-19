@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Space Endless Runner</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li>
+								<a href="#">Projects</a>
+								<ul>
+									<li><a href="IJslander.html">IJslander</a></li>
+									<li><a href="Space Endless Runner.html">Endless Space Runner</a></li>
+									<li><a href="Modular Scripts.html">Modular scripts</a></li>
+								</ul>
+							</li>											
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+						<header class="major">
+							<h2>Space Endless Runner VR</h2>
+							<p>A virtual reality obstacle dodging game. <br> In space.</p>
+						</header>
+						<div class="row gtr-150">
+							<div class="col-8 col-12-medium">
+
+								<!-- Content -->
+									<section id="content">
+										<h3>The controls</h3>
+										<p>The ship is controlled by the rotation of one of the VR controllers. The rotation of the ship is represented by a holographic version of the ship inside the cockpit.</p>
+
+										<h3>The rotation and movement</h3>
+										<p>I used a special method for rotation. The ship itself is not flying, the obstacles are moving towards the ship. So I made an empty GameObject and let the ship look at it. Instead of rotating the ship directly, I moved the empty GameObject and so the rotated as well.</p>
+										<p>But the ship needed to move as well as rotate. So I created an axis representing the rotation of the controller. When the controller was held straight, the axis would be zero and the ship would obviously not rotate or move, but when the controller is held at an angle of 25 degrees, the axis would be 1.</p>
+										<p>This created very smooth and responsive rotation and movement.</p>
+										<!-- GIF VAN CONTROLS -->
+										
+										<h3>Object Pooling</h3>
+										<p>To maximize the FPS I used object pooling for the obstacles, instead of instantiating every asteroid seperately. Because a new asteroid has to be instantiated every second, or even less</p>
+										<a class="image fit"><img src="gifs/Object Pooling.gif" alt="" /></a>
+										
+									</section>
+
+							</div>
+							<div class="col-4 col-12-medium">
+
+								<!-- Sidebar --> <!--
+									<section id="sidebar">
+										<section>
+											<h3>Project scripts</h3>
+											<footer>
+												<ul class="actions">
+													<li><a href="IJslander - scripts.html" class="button">Go to scripts</a></li>
+												</ul>
+											</footer>
+										</section>
+										<hr />
+										<section>
+										</section>
+									</section>
+									-->
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
