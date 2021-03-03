@@ -1,0 +1,215 @@
+﻿<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+
+<link rel="stylesheet" href="styles/vs2015.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+<html>
+	<head>
+		<title>Stephan Holding Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+				<h1 id="logo"><a href="#"></a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li>
+								<a href="#">Projects</a>
+								<ul>
+									<li><a href="IJslander.html">IJslander</a></li>
+									<li><a href="Gasunie King.html">Gasunie Project</a></li>
+									<li><a href="Handshake VR.html">COBRAcable Launch</a></li>
+								</ul>
+							</li>											
+						</ul>
+					</nav>
+				</header> 
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+						<header class="major">
+							<h2>Platform settings code</h2>
+						</header>
+						<div class="row gtr-150">
+							<div class="col-20 col-12-medium">
+
+								<!-- Content -->
+									<section id="content">
+									<pre><code class= "C#">
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+public enum Platform
+{
+	Oculus_Controllers,
+	Oculus_Handtracking,
+	HTC_VIVE,
+	Keyboard_Mouse,
+}
+
+//Commented out because you usually only need one instance of this SO. But can be used when needed.
+//[CreateAssetMenu(fileName = "New Custom player Settings file", menuName = "ScriptableObjects/Custom Player Settings")]
+[ExecuteInEditMode]
+public class CustomPlayerSettings : ScriptableObject
+{
+	[SerializeField]
+	private static Platform Platform; //static Platform enum that can be accessed by other classes with the GetPlatform() method.
+
+	//Platform enum for the editor. Another class must call SetPlatform() on awake to transfer this enum value to the static one.
+	public Platform serializedPlatform; 
+
+	//Dictionary holding all the scripting define symbols, ordered by platform.
+	private Dictionary<Platform, string> allScriptingSymbols = new Dictionary<Platform, string>()
+	{
+		{Platform.HTC_VIVE, "STEAM_VR"},
+		{Platform.Keyboard_Mouse, "NON_VR"},
+		{Platform.Oculus_Controllers, "OCULUS_VR"},
+		{Platform.Oculus_Handtracking, "OCULUS_VR"},
+	};
+
+	/// &lt;summary&gt
+	/// Get the current platform.
+	/// <para>Make sure SetPlatform() was called on awake by a MonoBehaviour.</para>
+	/// &lt;summary&gt
+	/// <returns></returns>
+	public static Platform GetPlatform()
+	{
+		return Platform;
+	}
+
+	/// &lt;summary&gt
+	/// Transfers the value of the enum in the editor to the static enum accessible by GetPlatform()
+	/// &lt;summary&gt
+	public void SetPlatform()
+	{
+		Platform = serializedPlatform;
+	}
+
+
+//Code below utilizes classes which are only available in the editor and thus cannot not be included in the build.
+#if UNITY_EDITOR 
+
+	/// &lt;summary&gt
+	/// Applies the chosen settings to Unity.
+	/// &lt;summary&gt
+	[ContextMenu("Apply Settings")]
+	public void ApplySettings()
+	{
+		SetPlatform();
+		SetScripingDefineSymbols();
+	}
+
+	/// &lt;summary&gt
+	/// Adds the correct scripting define symbols to Unity according to the chosen platform.
+	/// &lt;summary&gt
+	private void SetScripingDefineSymbols()
+	{
+		BuildTargetGroup group = BuildPipeline.GetBuildTargetGroup(EditorUserBuildSettings.activeBuildTarget);
+		string defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(group);
+
+		string setTo = PurgeDefines(defines);
+		setTo = AddToDefines(setTo, allScriptingSymbols[Platform]);
+
+		if (setTo != defines)
+			PlayerSettings.SetScriptingDefineSymbolsForGroup(group, setTo);
+	}
+
+	/// &lt;summary&gt
+	/// Checks the string "defines" if any of the symbols from "allScriptingSymbols" are in there, and if so, removes them.
+	/// &lt;summary&gt
+	/// &lt;param name="defines"&gt A string containing Unity's current scripting define symbols.&lt;/param&gt
+	/// &lt;returns&gt Version of the string without any of the custom scripting define symbols.&lt;/returns&gt
+	private string PurgeDefines(string defines)
+	{
+		string toSet = defines;
+
+		if (toSet != string.Empty)
+		{
+			foreach (KeyValuePair<Platform, string> toCheck in allScriptingSymbols)
+			{
+				string toRemove = string.Empty;
+				bool found = false;
+				if (toSet.Contains(toCheck.Value + ";"))
+				{
+					toRemove = toCheck.Value + ";";
+					found = true;
+				}
+				else if (toSet.Contains(toCheck.Value))
+				{
+					toRemove = toCheck.Value;
+					found = true;
+				}
+
+				if (found)
+					toSet = toSet.Replace(toRemove, string.Empty);
+			}
+
+			if (toSet.Substring(toSet.Length - 1, 1) == ";")
+				toSet = toSet.Remove(toSet.Length - 1, 1);
+		}
+
+		return toSet;
+	}
+
+	/// &lt;summary&gt
+	/// Adds the string "toAdd" to "defines" and returns it.
+	/// &lt;summary&gt
+	private string AddToDefines(string defines, string toAdd)
+	{
+		string toSet = defines;
+		toSet += ";" + toAdd;
+
+		return toSet;
+	}
+#endif
+}
+									</code></pre>
+
+									</section>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="https://github.com/StephanHolding" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="https://www.linkedin.com/in/stephan-holding-374741178/" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
