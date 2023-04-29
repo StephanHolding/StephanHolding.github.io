@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<link rel="icon" href="images/sh-logo.svg">
+	<title>Pythian VR</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets-generic/css/pythianvr.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets-generic/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper" class="umbra_bg">
+
+		<!-- Header -->
+		<header id="header">
+			<h1 class="drop-shadow">Pythian VR</h1>
+		</header>
+
+		<!-- Nav -->
+		<nav id="nav">
+			<ul class="links">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="Umbra.html">Umbra</a></li>
+				<li ><a href="Cave Raiders.html">Cave Raiders</a></li>
+				<li class="active"><a href="Pythian VR.html">Pythian VR</a></li>
+				<li ><a href="IJslander.html">IJslander</a></li>
+			</ul>
+			<ul class="icons">
+				<li><a href="https://store.steampowered.com/app/1512200/PYTHIAN/" class="icon brands fa-steam"><span
+							class="label">Steam</span></a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- Post -->
+			<section class="post">
+				<header>
+
+					<h3>Steam</h3>
+					<p>
+						Find this project on <a href="https://store.steampowered.com/app/1512200/PYTHIAN/">Steam.</a>
+					</p>
+
+				</header>
+				<main class="major">
+
+					<div class="row gtr-150">
+						<div class="col-20 col-12-medium">
+
+							<!-- Content -->
+								<section id="content">
+									
+									<h3>The project itself</h3>
+									<p>IJslander is a Dutch company which makes equipment for playgrounds. They asked my team and me to create a VR application to show off their equipment.</p>
+									<p>All playground equipment is property of IJslander B.V.</p>
+									<h3>My contribution to the project</h3>
+									<p>The following points are the systems that I've created while working on this project. A more in-depth explanation is written further below.</p>
+									<ol>
+										<li>Object placing system</li>
+										<li>Object information system</li>
+										<li>Catalogue system</li>
+										<li>Coloring system</li>
+										<li>Serialization system</li>
+										<li>Localization system</li>
+									</ol>
+									
+										<h4>Object placing system</h4>
+										<p>	Every object of the playground equipment has a fall zone. This fall zone has to be entirely on the playground and cannot intersect with other objects or their fall zones.</p>
+										<p>	I used Unity primitves with a trigger collider as the fall zones. I placed an empty GameObject at every corner of the fall zone.
+											All those objects shoot a raycast down. And only when all the raycasts hit the playground, the object will be fully on the field. And so the first boolean will be set to true.</p>
+										<p>	The aforementioned trigger collider is used to detect if an object or its fall zone is intersecting ours. If that is not the case, the second boolean will be set to true.
+											If both booleans are true, then the object can be placed and the fall zone will turn from red to green.</p>
+											   <a class="image fit-medium"><img src="gifs/GIFPlacement1.gif" alt="" /></a>
+											
+											
+										<h4>Object information system</h4>
+										<p> Every object needs to have a component containing information about that object. For example: its name, product code, dimensions or weight.</p>
+										<p> This is a small script containing all variables with information about the object in question. This information is placed on the Catalogue's User Interface to help choose which object to place on your playground.</P>
+											<a class="image fit-medium"><img src="images/SCcatalogue1.jpg" alt="" /></a>
+											
+											
+										<h4>Catalogue system</h4>
+										<p> Boiled down to the basics, the Catalogue is a big list of prefabs divided into a couple of subgroups. 
+											It accesses the Object Information component on the prefab and displays this information on the UI. There's also a thumbnail shown of the prefab you are currently looking at.
+											When you press this thumbnail, the 3D model will appear and you can place it using the Object Placing system.</p>
+											<a class="image fit-medium"><img src="images/SCcatalogue2.jpg" alt="" /></a>
+											
+										<h4>Coloring system</h4>
+										<p>Some objects have pieces of their mesh that can be colored. When the object is instantiated, it gets an instance of the prefab's original material. So only that object's color changes, and not the prefab itself.</p>
+										<p>There is only a limited amount of colors that IJslander can put on their equipment. These colors are stored on a ScriptableObject, which is more efficient than manually setting the color options on every object.</P> 
+											<a class="image fit-medium"><img src="gifs/GIFcolor1.gif" alt="" /></a>
+											
+										<h4>Serialization system</h4>
+										<p> On every playground (there are three: 10x10, 20x20 and 30x30) there is an option to save the layout you've made.</p>
+										<p> The serializable data for an object is held by a script named 'SerializableObjectData'. When the save button is pressed, an instance of this script is created for every placed object. This contains the object's position, rotation the color of its materials.
+											All these instances are then placed into an array and serialized by the DataManager using a binary formatter.
+											The files are saved in their own folder in Unity's persistent datapath under a name of your own choosing.</p> 
+											<a class="image fit-medium"><img src="gifs/GIFserialization1.gif" alt="" /></a>
+										
+										<h4>Localization system</h4>
+										<p> IJslander has international exhibitions and so they wanted a system to change the language of the application. I did this by giving every translatable text a script with a key. Then I serialized it to a JSON file. I chose JSON because it has to be readable to translate it.
+											So this file contains a key and a value for every piece of text that has to be translated. When the application starts the appropriate language file is loaded into a Dictionary. Now when a piece of text needs translation, it can search its key in the Dictionary and use the matching value.</p>
+											<a class="image fit-medium"><img src="gifs/GIFlocalization1.gif" alt="" /></a>
+								</section>
+
+						</div>
+					</div>
+
+				</main>
+
+			</section>
+
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+
+		</footer>
+
+		<!-- Copyright -->
+		<div id="copyright">
+
+		</div>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets-generic/js/jquery.min.js"></script>
+	<script src="assets-generic/js/jquery.scrollex.min.js"></script>
+	<script src="assets-generic/js/jquery.scrolly.min.js"></script>
+	<script src="assets-generic/js/browser.min.js"></script>
+	<script src="assets-generic/js/breakpoints.min.js"></script>
+	<script src="assets-generic/js/util.js"></script>
+	<script src="assets-generic/js/main.js"></script>
+
+</body>
+
+</html>
