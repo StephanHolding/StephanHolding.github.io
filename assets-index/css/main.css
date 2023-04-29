@@ -3110,7 +3110,7 @@ input, select, textarea {
 			input[type="button"],
 			button,
 			.button {
-				padding: 0;
+				padding: 0, 5px;
 			}
 
 				input[type="submit"].icon,
