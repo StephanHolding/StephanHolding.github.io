@@ -3370,7 +3370,7 @@ table.alt tbody tr td {
 	overflow: hidden;
 }
 
-#wrapper>.bg {
+/* #wrapper>.bg {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -3383,7 +3383,7 @@ table.alt tbody tr td {
 	background-repeat: no-repeat;
 	filter: blur(5px);
 	z-index: -1;
-}
+} */
 
 #wrapper>.bg.fixed {
 	position: fixed;
@@ -4909,4 +4909,19 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 	right: 0;
 	width: 100%;
 	height: 100%;
+}
+
+.bg-image
+{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	display: block;
+	filter: blur(5px);
+	background-image: url(../../images/pythian1.jpg);
+	background-color: black;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+
 }

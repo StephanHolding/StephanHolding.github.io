@@ -3371,18 +3371,12 @@ table.alt tbody tr td {
 }
 
 #wrapper>.bg {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+	filter: blur(5px);
 	background-image: url(../../images/ijslanderBG.png);
 	background-color: black;
-	background-size: cover;
-	background-position: center;
 	background-repeat: no-repeat;
-	filter: blur(5px);
-	z-index: -1;
+	background-attachment: fixed;
+	background-size: cover;
 }
 
 #wrapper>.bg.fixed {
@@ -3926,7 +3920,7 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 
 #main {
 	/* window color */
-	background-color: #005881be;
+	background-color: #0e75a5c5;
 	position: relative;
 	margin: 0 auto;
 	width: calc(100% - 4rem);
@@ -4909,4 +4903,19 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 	right: 0;
 	width: 100%;
 	height: 100%;
+}
+
+.bg-image
+{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	display: block;
+	filter: blur(5px);
+	background-image: url(../../images/ijslanderBG.png);
+	background-color: black;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+
 }
